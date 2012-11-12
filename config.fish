@@ -36,12 +36,45 @@ function __prompt_tmux
 	echo -n $__prompt_fg_mux(tmux display-message -p "#I")$__prompt_fg_sep'.'
 end
 
-function __prompt_statuschar
-	expr index $__prompt_gs_staged $argv[1] >/dev/null ^&1
-	and echo -n $__prompt_reset$argv[2]
-	and return
-	expr index $__prompt_gs_indexed $argv[1] >/dev/null ^&1
-	and echo -n $__prompt_fg_branch$argv[2]
+function __prompt_whereami
+	# Todo: Collapse this as it gets too long.
+	set -l dir (pwd | sed -e "s,^$HOME,~,")
+	set -l path (echo $dir | tr '/' '\n')
+	set -l len (count $path)
+	set -l collapse (expr $len - 3)
+	echo -n $path[1]
+	if test $len -eq 1
+		return
+	end
+	if test $collapse -gt 1
+		for elem in $path[2..$collapse]
+			echo -n /
+		end
+	else
+		set collapse 1
+	end
+	for elem in $path[(expr $collapse + 1)..$len]
+		echo -n /$elem
+	end
+end
+
+function __prompt_battery_info
+	set -l charge (acpi -b | sed 's/.*, \([0-9]\+\).*/\1/')
+	if test $charge -ge 98
+		return
+	else if test (expr (acpi -b) : '.*Discharging') -eq 0
+		echo -n $__prompt_fg_charging
+	else if test $charge -ge 70
+		echo -n $__prompt_fg_good
+	else if test $charge -ge 30
+		echo -n $__prompt_fg_warning
+	else if test $charge -ge 12
+		echo -n $__prompt_fg_bad
+	else
+		echo -n $__prompt_fg_urgent
+		echo -n $__prompt_bg_urgent
+	end
+	echo -n [$charge%]$__prompt_reset
 end
 
 function __prompt_git_location
@@ -55,6 +88,13 @@ function __prompt_git_location
 	test -n "$branch"; and echo -n $__prompt_fg_branch$branch
 	test -n "$tag"; and echo -n $__prompt_fg_sep'#'$__prompt_fg_branch$tag;
 	echo -n ' '
+end
+
+function __prompt_statuschar
+	expr index $__prompt_gs_staged $argv[1] >/dev/null ^&1
+	and echo -n $__prompt_reset$argv[2]
+	expr index $__prompt_gs_indexed $argv[1] >/dev/null ^&1
+	and echo -n $__prompt_fg_branch$argv[2]
 end
 
 function __prompt_git_status
@@ -93,7 +133,7 @@ function fish_prompt
 	# Host
 	echo -n $__prompt_fg_host$__prompt_host$__prompt_fg_sep':'
 	# Location
-	echo -n $__prompt_fg_path(pwd|sed -e "s,^$HOME,~,")
+	echo -n $__prompt_fg_path(__prompt_whereami)
 	# Become aware of the repository
 	set -l gitdir (git rev-parse --git-dir ^/dev/null)
 	test -n "$gitdir";
@@ -108,4 +148,13 @@ function fish_prompt
 	test -n "$gitdir"; and echo -n »; or echo -n →
 	# Prep for user input
 	echo -n $__prompt_reset' '
+end
+
+function fish_right_prompt
+	echo -n $__prompt_fg_weekday(date +"%a")' '
+	echo -n $__prompt_fg_daynum(date +"%d")' '
+	echo -n $__prompt_reset
+	echo -n $__prompt_fg_time(date +"%H:%M")' '
+	__prompt_battery_info
+	echo -n $__prompt_reset
 end
