@@ -32,7 +32,3 @@ set -g __prompt_fg_urgent (set_color -o white)
 set -g __prompt_bg_urgent (set_color -b red)
 
 set -g __prompt_reset (set_color normal)
-
-if test -z "$TMUX"
-	tmux attach; or tmux new
-end
