@@ -10,34 +10,30 @@ function __prompt_tmux
 end
 
 function __prompt_whereami
-	# Todo: Collapse this as it gets too long.
 	set -l dir (pwd | sed -e "s,^$HOME,~,")
-	set -l path (echo $dir | tr '/' '\n')
-	set -l len (count $path)
-	set -l collapse (expr $len - 3)
-	echo -n $path[1]
-	if test $len -eq 1
-		return
-	end
-	if test $collapse -gt 1
-		echo -n /…
+	set -l len (expr length $dir)
+	if test $len -gt 32
+		echo -n …(echo $dir | cut -c(expr $len - 32)-$len)
 	else
-		set collapse 1
-	end
-	for elem in $path[(expr $collapse + 1)..$len]
-		echo -n /$elem
+		echo -n $dir
 	end
 end
 
 function __prompt_git_location
 	set -l branch (git symbolic-ref HEAD ^/dev/null|cut -d '/' -f 3)
+	set -l snipped ""
+	if test (expr length $branch) -gt 16
+		set snipped (echo $branch | cut -c1-15)…
+	else
+		set snipped $branch
+	end
 	set -l tag (git describe --tags --exact-match HEAD ^/dev/null)
-	if test -z "$branch$tag"
+	if test -z "$snipped$tag"
 		echo -n $__prompt_fg_branch' <detached> '
 		return
 	end
 	echo -n $__prompt_fg_sep' on '
-	test -n "$branch"; and echo -n $__prompt_fg_branch$branch
+	test -n "$snipped"; and echo -n $__prompt_fg_branch$snipped
 	test -n "$tag"; and echo -n $__prompt_fg_sep'#'$__prompt_fg_branch$tag;
 	echo -n ' '
 end
