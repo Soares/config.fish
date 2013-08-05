@@ -1,5 +1,10 @@
 function __prompt_battery_info
-	set -l charge (acpi -b | sed 's/[^,]*, \([0-9]\+\).*/\1/')
+	set -l power (acpi -b 2>&1)
+	echo $power | grep "^No support" >/dev/null
+	if test $status -eq 0
+		return
+	end
+	set -l charge (echo $power | sed 's/[^,]*, \([0-9]\+\).*/\1/')
 	if test $charge -ge 98
 		return
 	else if test (expr (acpi -b) : '.*Discharging') -eq 0
