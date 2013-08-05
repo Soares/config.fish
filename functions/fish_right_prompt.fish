@@ -1,5 +1,5 @@
 function __prompt_battery_info
-	set -l charge (acpi -b | sed 's/.*, \([0-9]\+\).*/\1/')
+	set -l charge (acpi -b | sed 's/[^,]*, \([0-9]\+\).*/\1/')
 	if test $charge -ge 98
 		return
 	else if test (expr (acpi -b) : '.*Discharging') -eq 0
@@ -19,7 +19,6 @@ end
 
 function fish_right_prompt
 	echo -n $__prompt_fg_weekday(date +"%a")' '
-	echo -n $__prompt_fg_daynum(date +"%d")' '
 	echo -n $__prompt_reset
 	echo -n $__prompt_fg_time(date +"%H:%M")' '
 	__prompt_battery_info

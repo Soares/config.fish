@@ -20,9 +20,7 @@ function __prompt_whereami
 		return
 	end
 	if test $collapse -gt 1
-		for elem in $path[2..$collapse]
-			echo -n /
-		end
+		echo -n /…
 	else
 		set collapse 1
 	end
