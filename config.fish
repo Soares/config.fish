@@ -22,7 +22,7 @@ set -g __prompt_fg_branch (set_color magenta)
 set -g __prompt_fg_prompt (set_color cyan)
 
 set -g __prompt_fg_weekday (set_color magenta)
-set -g __prompt_fg_time (set_color yellow)
+set -g __prompt_fg_time (set_color cyan)
 
 set -g __prompt_fg_charging (set_color blue)
 set -g __prompt_fg_good (set_color green)
