@@ -1,4 +1,3 @@
-- Change time to yellow
 - Do a pass over the existing code, clean it up some
 - Reconsider keybindings (Ctrl-E eol-accept?)
 - Get weather in the fish prompt
