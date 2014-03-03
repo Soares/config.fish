@@ -33,6 +33,8 @@ set -g __prompt_bg_urgent (set_color -b red)
 
 set -g __prompt_reset (set_color normal)
 
-if test -z "$TMUX"
-	tmux attach; or tmux new
+if test -n "$DISPLAY"
+	if test -z "$TMUX"
+		tmux attach; or tmux new
+	end
 end
