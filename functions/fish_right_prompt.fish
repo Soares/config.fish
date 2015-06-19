@@ -1,4 +1,5 @@
 function __prompt_battery_info
+	return # TODO
 	set -l power (acpi -b 2>&1)
 	echo $power | grep "^No support" >/dev/null
 	if test $status -eq 0

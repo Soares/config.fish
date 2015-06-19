@@ -11,7 +11,7 @@ end
 
 function __prompt_whereami
 	set -l dir (pwd | sed -e "s,^$HOME,~,")
-	set -l len (expr length $dir)
+	set -l len (echo $dir | awk '{ print length }')
 	if test $len -gt 32
 		echo -n …(echo $dir | cut -c(expr $len - 32)-$len)
 	else
@@ -22,7 +22,7 @@ end
 function __prompt_git_location
 	set -l branch (git symbolic-ref HEAD ^/dev/null|cut -d '/' -f 3)
 	set -l snipped ""
-	if test (expr length $branch) -gt 16
+	if test (echo $branch | awk '{ print length }') -gt 16
 		set snipped (echo $branch | cut -c1-15)…
 	else
 		set snipped $branch
@@ -39,9 +39,9 @@ function __prompt_git_location
 end
 
 function __prompt_statuschar
-	expr index $__prompt_gs_staged $argv[1] >/dev/null ^&1
+	echo $__prompt_gs_staged | grep -b $argv[1] >/dev/null ^&1
 	and echo -n $__prompt_reset$argv[2]
-	expr index $__prompt_gs_indexed $argv[1] >/dev/null ^&1
+	echo $__prompt_gs_indexed | grep -b $argv[1] >/dev/null ^&1
 	and echo -n $__prompt_fg_branch$argv[2]
 end
 
@@ -52,12 +52,12 @@ function __prompt_git_status
 	test -z $gs; and echo -n $__prompt_fg_good'✔'; and return 0
 
 	# Check if there are unmerged or unstaged files
-	echo $gs|grep -qe "^\(..\)*\(UU\|MM\|AA\)"; and set unmerged
+	echo $gs|grep -qe "^\(..\)*\(UU\|AA\)"; and set unmerged
 	echo $gs|grep -qe "^\(..\)*??"; and set unstaged
 
 	# Split up the index flags and the staging flags
-	set -g __prompt_gs_indexed (echo $gs|sed -e "s/\(.\).\?/\1/g"|tr -d '?U')
-	set -g __prompt_gs_staged (echo $gs|sed -e "s/.\(.\?\)/\1/g"|tr -d '?U')
+	set -g __prompt_gs_indexed (echo $gs|sed -e "s/\(.\)./\1/g"|tr -d '?U')
+	set -g __prompt_gs_staged (echo $gs|sed -e "s/.\(.\)/\1/g"|tr -d '?U')
 
 	__prompt_statuschar 'M' '*'
 	__prompt_statuschar 'A' '+'
