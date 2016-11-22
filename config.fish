@@ -8,9 +8,10 @@ set fish_greeting ''
 set -g XDG_CONFIG_HOME $HOME/.config
 set -g XDG_CACHE_HOME $HOME/.cache
 set -g XDG_DATA_HOME $HOME/.local/share
-set -gx PATH $HOME/.cabal/bin $HOME/.local/bin $PATH
+set -gx PATH /Users/nate/Code/anaconda2/bin /Users/nate/Code/anaconda3/bin /usr/texbin $HOME/.cabal/bin $HOME/.local/bin $PATH
 set -gx EDITOR vim
 set -gx SUDO_EDITOR vim
+set -gx PYTHONSTARTUP $HOME/.config/python/startup.py
 
 set -g __prompt_fg_sep (set_color cyan)
 set -g __prompt_fg_user (set_color magenta)
@@ -40,3 +41,6 @@ if test -n "$DISPLAY"
 		tmux attach; or tmux new
 	end
 end
+
+alias e "nvim"
+alias o "nvr -c 'doau BufEnter'"

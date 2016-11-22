@@ -12,9 +12,11 @@ if command ls --version 1>/dev/null 2>/dev/null
 		command ls $param $argv
 	end
 
-	if type -f dircolors >/dev/null
-		eval (dircolors -c ~/.config/dircolors/256dark)
-	end
+  # TODO: Enable this once you have a terminal that supports true colors.
+  # if type -f gdircolors >/dev/null
+	# 	eval (gdircolors -c ~/.config/dircolors/tomorrow-night-bright)
+	# end
+  setenv LSCOLORS gxBxhxDxfxhxhxhxhxcxcx
 
 else
 	# BSD, OS X and a few more support colors through the -G switch instead

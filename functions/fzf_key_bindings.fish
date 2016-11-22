@@ -1,0 +1,1 @@
+/Users/nate/.fzf/shell/key-bindings.fish
