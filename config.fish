@@ -8,9 +8,8 @@ set fish_greeting ''
 set -g XDG_CONFIG_HOME $HOME/.config
 set -g XDG_CACHE_HOME $HOME/.cache
 set -g XDG_DATA_HOME $HOME/.local/share
-set -gx PATH /Users/nate/Code/anaconda2/bin /Users/nate/Code/anaconda3/bin /usr/texbin $HOME/.cabal/bin $HOME/.local/bin $PATH
-set -gx EDITOR vim
-set -gx SUDO_EDITOR vim
+set -gx EDITOR nvim
+set -gx SUDO_EDITOR nvim
 set -gx PYTHONSTARTUP $HOME/.config/python/startup.py
 
 set -g __prompt_fg_sep (set_color cyan)
@@ -36,11 +35,13 @@ set -g __prompt_bg_urgent (set_color -b red)
 
 set -g __prompt_reset (set_color normal)
 
-if test -n "$DISPLAY"
-	if test -z "$TMUX"
-		tmux attach; or tmux new
-	end
-end
-
 alias e "nvim"
 alias o "nvr -c 'doau BufEnter'"
+
+set -gx PATH $HOME/.cabal/bin $PATH
+set -gx PATH $HOME/.python/anaconda3/bin $HOME/.python/anaconda2/bin $PATH
+
+if status --is-interactive
+  eval sh $HOME/.config/base16-shell/scripts/base16-tomorrow.sh
+end
+  
