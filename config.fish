@@ -1,8 +1,12 @@
 set fish_greeting ''
 
+set -gx PATH /bin /sbin
+set -gx PATH /usr/bin /usr/sbin $PATH
+set -gx PATH /usr/local/bin /usr/local/sbin $PATH
 set -gx PATH /usr/texbin $PATH
-set -gx PATH $HOME/Code/anaconda2/bin $HOME/Code/anaconda3/bin /usr/texbin $PATH
+set -gx PATH $HOME/.config/fzf/bin $PATH
 set -gx PATH $HOME/.cabal/bin $PATH
+set -gx PATH $HOME/Code/anaconda2/bin $HOME/Code/anaconda3/bin $PATH
 set -gx PATH $HOME/.local/bin $PATH
 
 set -g XDG_CONFIG_HOME $HOME/.config
@@ -10,9 +14,9 @@ set -g XDG_CACHE_HOME $HOME/.cache
 set -g XDG_DATA_HOME $HOME/.local/share
 
 if test -n "$NVIM_LISTEN_ADDRESS"
-	alias h "nvr -o -c 'doau BufEnter'"
-	alias v "nvr -O -c 'doau BufEnter'"
-	alias t "nvr --remote-tab -c 'doau BufEnter'"
+	alias h "nvr -c 'doau BufEnter' -o"
+	alias v "nvr -c 'doau BufEnter' -O"
+	alias t "nvr -c 'doau BufEnter' --remote-tab"
 	alias o "nvr -c 'doau BufEnter'"
 	alias e "nvr -c 'doau BufEnter'"
 	alias neovim 'command nvim'
