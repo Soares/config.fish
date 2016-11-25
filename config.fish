@@ -14,8 +14,11 @@ if test -n "$NVIM_LISTEN_ADDRESS"
 	alias v "nvr -O -c 'doau BufEnter'"
 	alias t "nvr --remote-tab -c 'doau BufEnter'"
 	alias o "nvr -c 'doau BufEnter'"
+	alias e "nvr -c 'doau BufEnter'"
 	alias neovim 'command nvim'
 	alias nvim "echo 'You\'re already in nvim. Consider using o, h, v, or t instead. Use \'neovim\' to force.'"
+else
+  alias e 'nvim'
 end
 set -gx EDITOR 'nvim'
 
@@ -69,4 +72,4 @@ set -g fish_pager_color_description yellow
 set -g fish_pager_color_prefic cyan
 set -g fish_pager_color_progress cyan
 
-set -gx FZF_DEFAULT_OPTS '--color fg:-1,fg+:-1,bg:-1,bg+:-1,hl:2,hl+:2,pointer:4,prompt:4,info:5,spinner:5'
+set -gx FZF_DEFAULT_OPTS '--color fg:-1,fg+:-1,bg:-1,bg+:-1,hl:4,hl+:4,pointer:4,prompt:4,info:5,spinner:5'
