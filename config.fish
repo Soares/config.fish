@@ -9,8 +9,18 @@ set -g XDG_CONFIG_HOME $HOME/.config
 set -g XDG_CACHE_HOME $HOME/.cache
 set -g XDG_DATA_HOME $HOME/.local/share
 
-set -gx EDITOR nvim
+if test -n "$NVIM_LISTEN_ADDRESS"
+	alias h "nvr -o -c 'doau BufEnter'"
+	alias v "nvr -O -c 'doau BufEnter'"
+	alias t "nvr --remote-tab -c 'doau BufEnter'"
+	alias o "nvr -c 'doau BufEnter'"
+	alias neovim 'command nvim'
+	alias nvim "echo 'You\'re already in nvim. Consider using o, h, v, or t instead. Use \'neovim\' to force.'"
+end
+set -gx EDITOR 'nvim'
+
 set -gx SUDO_EDITOR nvim
+
 set -gx PYTHONSTARTUP $HOME/.config/python/startup.py
 
 set -g __prompt_fg_sep (set_color cyan)
@@ -35,9 +45,6 @@ set -g __prompt_fg_urgent (set_color -o white)
 set -g __prompt_bg_urgent (set_color -b red)
 
 set -g __prompt_reset (set_color normal)
-
-alias e "nvim"
-alias o "nvr -c 'doau BufEnter'"
 
 # We set all these manually so that they use the system colors, which will be
 # set to look all pretty by either nvim or a base16 term profile.
