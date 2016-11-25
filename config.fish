@@ -1,16 +1,16 @@
-# Bugs:
-#  the __prompt_statuschar else if bug. WTF!?
-#  default keybindings erase all other bindings
-#  same with default commands
-#  can't multiline in (parens)
 set fish_greeting ''
+
+set -gx PATH /usr/texbin $PATH
+set -gx PATH $HOME/Code/anaconda2/bin $HOME/Code/anaconda3/bin /usr/texbin $PATH
+set -gx PATH $HOME/.cabal/bin $PATH
+set -gx PATH $HOME/.local/bin $PATH
 
 set -g XDG_CONFIG_HOME $HOME/.config
 set -g XDG_CACHE_HOME $HOME/.cache
 set -g XDG_DATA_HOME $HOME/.local/share
-set -gx PATH /Users/nate/Code/anaconda2/bin /Users/nate/Code/anaconda3/bin /usr/texbin $HOME/.cabal/bin $HOME/.local/bin $PATH
-set -gx EDITOR vim
-set -gx SUDO_EDITOR vim
+
+set -gx EDITOR nvim
+set -gx SUDO_EDITOR nvim
 set -gx PYTHONSTARTUP $HOME/.config/python/startup.py
 
 set -g __prompt_fg_sep (set_color cyan)
@@ -36,11 +36,30 @@ set -g __prompt_bg_urgent (set_color -b red)
 
 set -g __prompt_reset (set_color normal)
 
-if test -n "$DISPLAY"
-	if test -z "$TMUX"
-		tmux attach; or tmux new
-	end
-end
-
 alias e "nvim"
 alias o "nvr -c 'doau BufEnter'"
+
+# We set all these manually so that they use the system colors, which will be
+# set to look all pretty by either nvim or a base16 term profile.
+set -g fish_color_autosuggestion yellow
+set -g fish_color_command blue
+set -g fish_color_comment red
+set -g fish_color_cwd green
+set -g fish_color_cwd_root red
+set -g fish_color_error red
+set -g fish_color_escape cyan
+set -g fish_color_history_current cyan
+set -g fish_color_match cyan
+set -g fish_color_normal normal
+set -g fish_color_operator cyan
+set -g fish_color_param cyan
+set -g fish_color_quote brown
+set -g fish_color_redirection normal
+set -g fish_color_search_match --background purple
+set -g fish_color_valid_path --underline
+set -g fish_pager_color_completion normal
+set -g fish_pager_color_description yellow
+set -g fish_pager_color_prefic cyan
+set -g fish_pager_color_progress cyan
+
+set -gx FZF_DEFAULT_OPTS '--color fg:-1,fg+:-1,bg:-1,bg+:-1,hl:2,hl+:2,pointer:4,prompt:4,info:5,spinner:5'
