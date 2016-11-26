@@ -18,11 +18,10 @@ if test -n "$NVIM_LISTEN_ADDRESS"
 	alias v "nvr -c 'doau BufEnter' -O"
 	alias t "nvr -c 'doau BufEnter' --remote-tab"
 	alias o "nvr -c 'doau BufEnter'"
-	alias e "nvr -c 'doau BufEnter'"
 	alias neovim 'command nvim'
 	alias nvim "echo 'You\'re already in nvim. Consider using o, h, v, or t instead. Use \'neovim\' to force.'"
 else
-  alias e 'nvim'
+  alias o 'nvim'
 end
 set -gx EDITOR 'nvim'
 
