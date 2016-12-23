@@ -6,7 +6,7 @@ set -gx PATH /usr/local/bin /usr/local/sbin $PATH
 set -gx PATH /usr/texbin $PATH
 set -gx PATH $HOME/.config/fzf/bin $PATH
 set -gx PATH $HOME/.cabal/bin $PATH
-set -gx PATH $HOME/Code/anaconda2/bin $HOME/Code/anaconda3/bin $PATH
+set -gx PATH $HOME/Code/anaconda2/bin $PATH
 set -gx PATH $HOME/.local/bin $PATH
 
 set -g XDG_CONFIG_HOME $HOME/.config
