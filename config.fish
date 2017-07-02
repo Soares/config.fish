@@ -10,13 +10,10 @@ set -gx PATH $HOME/.config/fzf/bin $PATH
 set -gx PATH $HOME/.cabal/bin $PATH
 
 # set -gx PATH $HOME/Code/anaconda2/bin $PATH
-# set -gx PYENV_ROOT /usr/local/var/pyenv
-# set -gx PATH $PYENV_ROOT/shims $PATH
-set -gx PATH $HOME/.pyenv/bin $PATH
-status --is-interactive; and source (pyenv init -|psub)
+set -gx PYENV_ROOT /usr/local/var/pyenv
+set -gx PATH $PYENV_ROOT/shims $PATH
 
 set -gx PATH $HOME/.local/bin $PATH
-
 
 set -g XDG_CONFIG_HOME $HOME/.config
 set -g XDG_CACHE_HOME $HOME/.cache
