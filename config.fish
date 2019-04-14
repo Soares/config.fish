@@ -3,16 +3,6 @@ set fish_greeting ''
 set -gx PATH /bin /sbin
 set -gx PATH /usr/bin /usr/sbin $PATH
 set -gx PATH /usr/local/bin /usr/local/sbin $PATH
-
-set -gx PATH /usr/texbin $PATH
-set -gx PATH $HOME/.config/fzf/bin $PATH
-
-set -gx PATH $HOME/.cabal/bin $PATH
-
-# set -gx PATH $HOME/Code/anaconda2/bin $PATH
-set -gx PYENV_ROOT /usr/local/var/pyenv
-set -gx PATH $PYENV_ROOT/shims $PATH
-
 set -gx PATH $HOME/.local/bin $PATH
 
 set -g XDG_CONFIG_HOME $HOME/.config
@@ -30,10 +20,7 @@ else
   alias o 'nvim'
 end
 set -gx EDITOR 'nvim'
-
 set -gx SUDO_EDITOR nvim
-
-set -gx PYTHONSTARTUP $HOME/.config/python/startup.py
 
 set -g __prompt_fg_sep (set_color cyan)
 set -g __prompt_fg_user (set_color magenta)
