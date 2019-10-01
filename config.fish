@@ -1,9 +1,15 @@
 set fish_greeting ''
 
-set -gx PATH /bin /sbin
-set -gx PATH /usr/bin /usr/sbin $PATH
-set -gx PATH /usr/local/bin /usr/local/sbin $PATH
-set -gx PATH $HOME/.local/bin $PATH
+function is_nixos
+  [ -e /etc/os-release ] && grep 'NAME=NixOS' /etc/os-release > /dev/null
+end
+
+if ! is_nixos
+  set -gx PATH /bin /sbin
+  set -gx PATH /usr/bin /usr/sbin $PATH
+  set -gx PATH /usr/local/bin /usr/local/sbin $PATH
+  set -gx PATH $HOME/.local/bin $PATH
+end
 
 set -g XDG_CONFIG_HOME $HOME/.config
 set -g XDG_CACHE_HOME $HOME/.cache
