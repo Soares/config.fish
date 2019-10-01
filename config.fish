@@ -8,9 +8,9 @@ if ! is_nixos
   set -gx PATH /bin /sbin
   set -gx PATH /usr/bin /usr/sbin $PATH
   set -gx PATH /usr/local/bin /usr/local/sbin $PATH
-  set -gx PATH $HOME/.local/bin $PATH
 end
 
+set -gx PATH $HOME/.local/bin $PATH
 set -g XDG_CONFIG_HOME $HOME/.config
 set -g XDG_CACHE_HOME $HOME/.cache
 set -g XDG_DATA_HOME $HOME/.local/share
@@ -25,6 +25,9 @@ if test -n "$NVIM_LISTEN_ADDRESS"
 else
   alias o 'nvim'
 end
+
+alias cat='bat'
+
 set -gx EDITOR 'nvim'
 set -gx SUDO_EDITOR nvim
 
