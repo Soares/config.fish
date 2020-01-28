@@ -36,24 +36,24 @@ set -g theme_nerd_fonts yes
 
 # We set all these manually so that they use the system colors, which will be
 # set to look all pretty by either nvim or a base16 term profile.
-# set -g fish_color_autosuggestion yellow
-# set -g fish_color_command blue
-# set -g fish_color_comment red
-# set -g fish_color_cwd green
-# set -g fish_color_cwd_root red
-# set -g fish_color_error red
-# set -g fish_color_escape cyan
-# set -g fish_color_history_current cyan
-# set -g fish_color_match cyan
-# set -g fish_color_normal normal
-# set -g fish_color_operator cyan
-# set -g fish_color_param cyan
-# set -g fish_color_quote brown
-# set -g fish_color_redirection normal
-# set -g fish_color_search_match --background purple
-# set -g fish_color_valid_path --underline
-# set -g fish_pager_color_completion normal
-# set -g fish_pager_color_description yellow
-# set -g fish_pager_color_prefic cyan
-# set -g fish_pager_color_progress cyan
+set -g fish_color_autosuggestion yellow
+set -g fish_color_command blue
+set -g fish_color_comment red
+set -g fish_color_cwd green
+set -g fish_color_cwd_root red
+set -g fish_color_error red
+set -g fish_color_escape cyan
+set -g fish_color_history_current cyan
+set -g fish_color_match cyan
+set -g fish_color_normal normal
+set -g fish_color_operator cyan
+set -g fish_color_param cyan
+set -g fish_color_quote brown
+set -g fish_color_redirection normal
+set -g fish_color_search_match --background purple
+set -g fish_color_valid_path --underline
+set -g fish_pager_color_completion normal
+set -g fish_pager_color_description yellow
+set -g fish_pager_color_prefic cyan
+set -g fish_pager_color_progress cyan
 
