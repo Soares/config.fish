@@ -15,6 +15,8 @@ set -g XDG_CONFIG_HOME $HOME/.config
 set -g XDG_CACHE_HOME $HOME/.cache
 set -g XDG_DATA_HOME $HOME/.local/share
 
+set -gx AGDA_DIR $HOME/.config/agda
+
 if test -n "$NVIM_LISTEN_ADDRESS"
 	alias h "nvr -c 'doau BufEnter' -o"
 	alias v "nvr -c 'doau BufEnter' -O"
